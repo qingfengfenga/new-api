@@ -78,7 +78,7 @@ const EditChannel = (props) => {
   };
   const [batch, setBatch] = useState(false);
   const [autoBan, setAutoBan] = useState(true);
-  // const [autoBan, setAutoBan] = useState(true);
+    // const [autoBan, setAutoBan] = useState(true);
   const [inputs, setInputs] = useState(originInputs);
   const [originModelOptions, setOriginModelOptions] = useState([]);
   const [modelOptions, setModelOptions] = useState([]);
@@ -86,6 +86,18 @@ const EditChannel = (props) => {
   const [basicModels, setBasicModels] = useState([]);
   const [fullModels, setFullModels] = useState([]);
   const [customModel, setCustomModel] = useState('');
+
+  // 添加新渠道
+  const addChannel = () => {
+    // 添加新渠道逻辑
+  };
+
+  // 从localStorage获取用户名作为默认分组名字
+  const getDefaultGroup = () => {
+    const username = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).username : 'default';
+    return username;
+  };
+
   const handleInputChange = (name, value) => {
     setInputs((inputs) => ({ ...inputs, [name]: value }));
     if (name === 'type') {
@@ -239,6 +251,15 @@ const EditChannel = (props) => {
       setInputs((inputs) => ({ ...inputs, models: localModels }));
     }
   }, [props.editingChannel.id]);
+
+  // 设置默认分组为当前用户名
+  useEffect(() => {
+    if (!isEdit) {
+      const defaultGroup = getDefaultGroup();
+      setInputs((inputs) => ({ ...inputs, groups: [defaultGroup] }));
+    }
+  }, [groupOptions]);
+
 
   const submit = async () => {
     if (!isEdit && (inputs.name === '' || inputs.key === '')) {
@@ -480,6 +501,7 @@ const EditChannel = (props) => {
             value={inputs.groups}
             autoComplete='new-password'
             optionList={groupOptions}
+            disabled={true} // 禁用分组选择框
           />
           {inputs.type === 18 && (
             <>
