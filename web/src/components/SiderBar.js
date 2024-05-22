@@ -73,7 +73,8 @@ const SiderBar = () => {
         itemKey: 'channel',
         to: '/channel',
         icon: <IconLayers />,
-        className: isAdmin() ? 'semi-navigation-item-normal' : 'tableHiddle',
+        // className: isAdmin() ? 'semi-navigation-item-normal' : 'tableHiddle',
+        className: 'semi-navigation-item-normal', // 普通用户可以添加自己的渠道
       },
       {
         text: '聊天',

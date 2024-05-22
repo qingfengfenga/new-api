@@ -74,7 +74,8 @@ func SetApiRouter(router *gin.Engine) {
 			optionRoute.PUT("/", controller.UpdateOption)
 		}
 		channelRoute := apiRouter.Group("/channel")
-		channelRoute.Use(middleware.AdminAuth())
+		//channelRoute.Use(middleware.AdminAuth())
+		channelRoute.Use(middleware.UserAuth())
 		{
 			channelRoute.GET("/", controller.GetAllChannels)
 			channelRoute.GET("/search", controller.SearchChannels)
@@ -130,7 +131,8 @@ func SetApiRouter(router *gin.Engine) {
 
 		}
 		groupRoute := apiRouter.Group("/group")
-		groupRoute.Use(middleware.AdminAuth())
+		//groupRoute.Use(middleware.AdminAuth())
+		channelRoute.Use(middleware.UserAuth())
 		{
 			groupRoute.GET("/", controller.GetGroups)
 		}
