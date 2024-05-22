@@ -201,6 +201,7 @@ const EditUser = (props) => {
                 value={inputs.group}
                 autoComplete='new-password'
                 optionList={groupOptions}
+                disabled={true} // 禁用分组选择框
               />
               <div style={{ marginTop: 20 }}>
                 <Typography.Text>{`剩余额度${renderQuotaWithPrompt(quota)}`}</Typography.Text>

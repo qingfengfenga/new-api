@@ -80,7 +80,6 @@ func setupLogin(user *model.User, c *gin.Context) {
 		DisplayName: user.DisplayName,
 		Role:        user.Role,
 		Status:      user.Status,
-		Group:       user.Group,
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": "",
@@ -175,6 +174,7 @@ func Register(c *gin.Context) {
 		Password:    user.Password,
 		DisplayName: user.Username,
 		InviterId:   inviterId,
+		Group:       user.Username, // 设置 Group 字段为用户名
 	}
 	if common.EmailVerificationEnabled {
 		cleanUser.Email = user.Email
@@ -496,6 +496,7 @@ func UpdateSelf(c *gin.Context) {
 		Username:    user.Username,
 		Password:    user.Password,
 		DisplayName: user.DisplayName,
+		Group:		 user.Group,
 	}
 	if user.Password == "$I_LOVE_U" {
 		user.Password = "" // rollback to what it should be

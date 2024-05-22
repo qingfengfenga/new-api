@@ -8,6 +8,7 @@ const AddUser = (props) => {
     username: '',
     display_name: '',
     password: '',
+    group: '', // 新增 group 字段
   };
   const [inputs, setInputs] = useState(originInputs);
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,8 @@ const AddUser = (props) => {
   const submit = async () => {
     setLoading(true);
     if (inputs.username === '' || inputs.password === '') return;
-    const res = await API.post(`/api/user/`, inputs);
+    const updatedInputs = { ...inputs, group: inputs.username }; // 设置group字段为用户名
+    const res = await API.post(`/api/user/`, updatedInputs);
     const { success, message } = res.data;
     if (success) {
       showSuccess('用户账户创建成功！');
