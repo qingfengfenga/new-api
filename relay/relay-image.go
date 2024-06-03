@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"one-api/common"
+	"one-api/constant"
 	"one-api/dto"
 	"one-api/model"
 	relaycommon "one-api/relay/common"
@@ -45,6 +46,13 @@ func RelayImageHelper(c *gin.Context, relayMode int) *dto.OpenAIErrorWithStatusC
 	// Prompt validation
 	if imageRequest.Prompt == "" {
 		return service.OpenAIErrorWrapper(errors.New("prompt is required"), "required_field_missing", http.StatusBadRequest)
+	}
+
+	if constant.ShouldCheckPromptSensitive() {
+		err = service.CheckSensitiveInput(imageRequest.Prompt)
+		if err != nil {
+			return service.OpenAIErrorWrapper(err, "sensitive_words_detected", http.StatusBadRequest)
+		}
 	}
 
 	if strings.Contains(imageRequest.Size, "×") {
@@ -131,7 +139,7 @@ func RelayImageHelper(c *gin.Context, relayMode int) *dto.OpenAIErrorWithStatusC
 	qualityRatio := 1.0
 	if imageRequest.Model == "dall-e-3" && imageRequest.Quality == "hd" {
 		qualityRatio = 2.0
-		if imageRequest.Size == "1024×1792" || imageRequest.Size == "1792×1024" {
+		if imageRequest.Size == "1024x1792" || imageRequest.Size == "1792x1024" {
 			qualityRatio = 1.5
 		}
 	}
