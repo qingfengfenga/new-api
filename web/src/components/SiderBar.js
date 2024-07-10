@@ -26,6 +26,7 @@ import {
   IconPriceTag,
   IconSetting,
   IconUser,
+  IconServer,
 } from '@douyinfe/semi-icons';
 import { Layout, Nav } from '@douyinfe/semi-ui';
 import { setStatusData } from '../helpers/data.js';
@@ -47,6 +48,7 @@ const SiderBar = () => {
   const routerMap = {
     home: '/',
     channel: '/channel',
+    deploy: '/deploy',
     token: '/token',
     redemption: '/redemption',
     topup: '/topup',
@@ -76,6 +78,17 @@ const SiderBar = () => {
         icon: <IconLayers />,
         className: isAdmin() ? 'semi-navigation-item-normal' : 'tableHiddle',
       },
+      {
+        text: '部署',
+        itemKey: 'deploy',
+        to: '/deploy',
+        icon: <IconServer />,
+        // className: isAdmin() ? 'semi-navigation-item-normal' : 'tableHiddle',
+        className: 
+          localStorage.getItem('deploy_link')
+          ? 'semi-navigation-item-normal'
+          : 'tableHiddle',
+      }, 
       {
         text: '聊天',
         itemKey: 'chat',
@@ -171,6 +184,7 @@ const SiderBar = () => {
       localStorage.getItem('enable_drawing'),
       localStorage.getItem('enable_task'),
       localStorage.getItem('chat_link'),
+      localStorage.getItem('deploy_link'),
       isAdmin(),
     ],
   );

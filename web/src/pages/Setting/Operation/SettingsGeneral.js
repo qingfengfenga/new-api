@@ -19,6 +19,7 @@ export default function GeneralSettings(props) {
     DisplayInCurrencyEnabled: false,
     DisplayTokenStatEnabled: false,
     DefaultCollapseSidebar: false,
+    DeployLink: '',
   });
   const refForm = useRef();
   const [inputsRow, setInputsRow] = useState(inputs);
@@ -107,6 +108,16 @@ export default function GeneralSettings(props) {
                   label={'聊天页面 2 链接'}
                   initValue={''}
                   placeholder='例如 ChatGPT Next Web 的部署地址'
+                  onChange={onChange}
+                  showClear
+                />
+              </Col>
+              <Col span={8}>
+                <Form.Input
+                  field={'DeployLink'}
+                  label={'部署页面链接'}
+                  initValue={''}
+                  placeholder='例如 Portainer 和 dockge 的地址'
                   onChange={onChange}
                   showClear
                 />

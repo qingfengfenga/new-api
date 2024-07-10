@@ -30,6 +30,14 @@ if (localStorage.getItem('chat_link')) {
   });
 }
 
+if (localStorage.getItem('deploy_link')) {
+  headerButtons.splice(1, 0, {
+    name: '部署',
+    to: '/deploy',
+    icon: 'comments',
+  });
+}
+
 const HeaderBar = () => {
   const [userState, userDispatch] = useContext(UserContext);
   let navigate = useNavigate();

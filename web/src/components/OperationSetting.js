@@ -49,6 +49,7 @@ const OperationSetting = () => {
     DataExportInterval: 5,
     DefaultCollapseSidebar: false, // 默认折叠侧边栏
     RetryTimes: 0,
+    DeployLink: '',
   });
 
   let [loading, setLoading] = useState(false);

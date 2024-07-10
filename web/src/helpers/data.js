@@ -27,6 +27,11 @@ export function setStatusData(data) {
   } else {
     localStorage.removeItem('chat_link2');
   }
+  if (data.deploy_link) {
+    localStorage.setItem('deploy_link', data.deploy_link);
+  } else {
+    localStorage.removeItem('deploy_link');
+  }
 }
 
 export function setUserData(data) {

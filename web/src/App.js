@@ -25,6 +25,7 @@ import Midjourney from './pages/Midjourney';
 import Pricing from './pages/Pricing/index.js';
 import Task from "./pages/Task/index.js";
 // import Detail from './pages/Detail';
+import Deploy from './pages/Deploy';
 
 const Home = lazy(() => import('./pages/Home'));
 const Detail = lazy(() => import('./pages/Detail'));
@@ -252,6 +253,14 @@ function App() {
             element={
               <Suspense fallback={<Loading></Loading>}>
                 <Chat />
+              </Suspense>
+            }
+          />
+          <Route
+            path='/deploy'
+            element={
+              <Suspense fallback={<Loading></Loading>}>
+                <Deploy />
               </Suspense>
             }
           />
